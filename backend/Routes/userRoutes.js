@@ -39,7 +39,7 @@ router.get("/user/:id", async (req, res) => {
 router.post("/register", async (req, res) => {
   if (req.body.password === req.body.confirmPassword) {
     try {
-      const emailcheck =  User.find({email : req.body.email});
+      const emailcheck = await User.findOne({email : req.body.email});
       if(emailcheck){
         return res.json({ message: "Email Already Exist" });
       }
