@@ -8,6 +8,8 @@ const nodemailer = require("nodemailer");
 require("../Database/connection/connectDb");
 const User = require("../Database/models/user");
 const cors = require("cors");
+const Medicine = require("../Database/models/medicine");
+const medicine = require("../Database/models/medicine");
 router.use(express.json());
 router.use(cors());
 
@@ -154,5 +156,10 @@ router.put("/reset_password/:email", async (req, res) => {
     res.status(404).json({ message: "passwords are not matching" });
   }
 });
+
+router.get('/medicines',async (req,res)=>{
+  const medicine=await Medicine.find();
+  res.send(medicine)
+})
 
 module.exports = router;
